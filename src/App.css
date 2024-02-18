@@ -36,3 +36,53 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+.photos-flex {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  margin: 10px;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.photo-item {
+  flex: 1 1 200px; /* Adjust the basis to control the initial size */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.photo-item img {
+  width: 100%; /* Ensure images are fully responsive within their container */
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover; /* Ensures images cover the area without losing aspect ratio */
+}
+
+@media (max-width: 875px) {
+  .photo-item {
+    flex: 1 1 180px; /* Adjust for smaller screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .photo-item {
+    flex: 1 1 150px; /* Further adjustment for smaller devices */
+  }
+}
+
+@media (max-width: 480px) {
+  .photo-item {
+    flex: 1 1 120px; /* Suitable for very small devices */
+  }
+}
+
+@media (max-width: 280px) {
+  .photo-item {
+    flex: 1 1 100%; /* Full width on very small screens */
+  }
+}
+
