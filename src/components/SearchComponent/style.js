@@ -10,7 +10,7 @@ export const FixedHeader = styled.div`
 `;
 
 export const MainContent = styled.div`
-  margin-top: [Height of your FixedHeader]; // Replace with actual height
+  margin-top: [Height of your FixedHeader]; 
   padding-top: 1rem;
 `;
 

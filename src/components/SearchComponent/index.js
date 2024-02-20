@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchPhotos } from '../../actions';
 import PhotosFlex from '../Photosflex'; 
@@ -8,7 +8,6 @@ const SearchComponent = () => {
   const [input, setInput] = useState('');
   const [tags, setTags] = useState([]);
   const inputRef = useRef(null); 
-  const [isKeyReleased, setIsKeyReleased] = useState(false);
   const dispatch = useDispatch();
   const searchTerms = useSelector((state) => state.search.searchTerms);
 
@@ -22,31 +21,27 @@ const SearchComponent = () => {
       dispatch(searchPhotos(tags.join(' '))); 
     }
   };
-  const onKeyDown = (e) => {
-    const { key } = e;
-    const trimmedInput = input.trim();
-  
-    if (key === ' ' && trimmedInput.length && !tags.includes(trimmedInput) ) {
-      e.preventDefault();
-      setTags(prevState => [...prevState, trimmedInput]);
-      setInput('');
+  useEffect(() => {
+    if (input.endsWith(' ') && input.trim() !== '') {
+      const newTag = input.trim();
+      if (!tags.includes(newTag)) {
+        setTags([...tags, newTag]);
+        setInput('');
+      } else {
+        setInput('');
+      }
     }
+  }, [input, tags]);
   
-    if (key === "Backspace" && !input.length && tags.length && isKeyReleased) {
+  const onKeyDown = (e) => {
+    if (e.key === "Backspace" && !input && tags.length) {
+      e.preventDefault(); 
       const tagsCopy = [...tags];
       const poppedTag = tagsCopy.pop();
-      e.preventDefault();
       setTags(tagsCopy);
       setInput(poppedTag);
     }
-  
-    setIsKeyReleased(false);
   };
-  
-  const onKeyUp = () => {
-    setIsKeyReleased(true);
-  }
-  
   const onChange = (e) => {
     const { value } = e.target;
     setInput(value);
@@ -54,8 +49,6 @@ const SearchComponent = () => {
   const deleteTag = (index) => {
     setTags(prevState => prevState.filter((tag, i) => i !== index))
   }
-
-
   return (
     <>
       <FixedHeader>
@@ -73,7 +66,6 @@ const SearchComponent = () => {
                 ref={inputRef} 
                 value={input}
                 onKeyDown={onKeyDown}
-                onKeyUp={onKeyUp}
                 onChange={onChange}
                 placeholder="Search for images"
                 
