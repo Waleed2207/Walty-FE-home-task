@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchPhotos } from '../../actions';
-import PhotosFlex from '../Photosflex'; 
-import { Container, Input,FixedHeader,MainContent,FixedBar, FlexColmn, Flex, Tag,ButtonTag, Button, SearchTermsContainer, Title, TermsContainer, Term } from './style.js'; 
+import PhotosFlex from '../PhotosFlex'; 
+import { Container, Input,FixedHeader,MainContent, Card, Row, Tag, ButtonTag, Button, SearchTermsContainer, Title, TermsContainer, Term } from './style.js'; 
 
 const SearchComponent = () => {
   const [input, setInput] = useState('');
@@ -11,8 +11,7 @@ const SearchComponent = () => {
   const dispatch = useDispatch();
   const searchTerms = useSelector((state) => state.search.searchTerms);
 
-  const handleSearch = (event) => {
-    event.preventDefault(); 
+  const handleSearch = () => {
   
     const trimmedInput = input.trim();
   
@@ -20,14 +19,17 @@ const SearchComponent = () => {
       if (!tags.includes(trimmedInput)) {
         const updatedTags = [...tags, trimmedInput];
         setTags(updatedTags);
-        dispatch(searchPhotos(updatedTags.join(' ')));
+        dispatch(searchPhotos(updatedTags.join('+')));
         dispatch(searchPhotos(trimmedInput));
         setInput('');
       }
+      else {
+        inputRef.current.setCustomValidity('Tag already exists.');
+        inputRef.current.reportValidity();
+      }
     } else {
       if (tags.length > 0) {
-        inputRef.current.setCustomValidity('Please enter another tag.');
-        // dispatch(searchPhotos(tags.join(' ')));
+        dispatch(searchPhotos(tags.join('+')));
       } else {
         inputRef.current.setCustomValidity('Please enter at least one tag.');
       }
@@ -55,10 +57,10 @@ const SearchComponent = () => {
   return (
     <>
       <FixedHeader>
-        <FlexColmn >
-          <Flex>
-              <h1>Walty Photos Engine</h1>
-              <Container>
+        <Card>
+          <h1>Walty Photos Engine</h1>
+          <Row>
+            <Container>
               {tags.map((tag, index) => (
                 <Tag key={index} className="tag">
                   {tag}
@@ -73,24 +75,22 @@ const SearchComponent = () => {
                 placeholder="Search for images"
                 
               />
-              </Container>
-              <Button onClick={handleSearch}>Search</Button>
-            </Flex>
-            <FixedBar>
-            <SearchTermsContainer>
-              <Title>Last 3 Searches:</Title>
-                <TermsContainer>
-                  {searchTerms.map((term, index) => (
-                    <Term key={index}>{term}</Term>
-                  ))}
+            </Container>
+            <Button onClick={handleSearch}>Search</Button>
+          </Row>
+          <SearchTermsContainer>
+            <Title>Last 3 Searches</Title>
+              <TermsContainer>
+                {searchTerms.map((term, index) => (
+                  <Term key={index}>{term}</Term>
+                ))}
               </TermsContainer>
           </SearchTermsContainer>
-          </FixedBar>
-        </FlexColmn>
-        </FixedHeader>
-        <MainContent>
-           <PhotosFlex />
-       </MainContent>
+        </Card>
+      </FixedHeader>
+      <MainContent>
+        <PhotosFlex />
+      </MainContent>
     </>
   );
 };
