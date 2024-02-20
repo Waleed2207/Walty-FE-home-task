@@ -8,11 +8,13 @@ const initialState = {
 export default function searchReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_SEARCH_TERM:
-      const lastTags = action.payload.split(' ');
-      return {
-        ...state,
-        searchTerms: Array.from(new Set([...lastTags, ...state.searchTerms])).slice(0, 3),
-      };
+       const newSearchTerm = action.payload.split('+');
+       const updatedSearchTerms = Array.from(new Set([...newSearchTerm, ...state.searchTerms])).slice(0, 3);
+	   console.log(updatedSearchTerms);
+       return {
+         ...state,
+         searchTerms: updatedSearchTerms,
+       };
     case SEARCH_PHOTOS_SUCCESS:
       return {
         ...state,

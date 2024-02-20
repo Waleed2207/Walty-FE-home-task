@@ -29,8 +29,7 @@ export const addMorePhotos = (photos) => {
 
 export const searchPhotos = (tag) => async (dispatch) => {
     try {
-      
-      const response = await axios.get(`${PIXABAY_API_URL}?key=${PIXABAY_API_KEY}&q=${encodeURIComponent(tag)}`);
+      const response = await axios.get(`${PIXABAY_API_URL}?key=${PIXABAY_API_KEY}&q=${encodeURIComponent(tag)}&image_type=photo`);
       dispatch({
         type: SEARCH_PHOTOS_SUCCESS,
         payload: response.data.hits, 

@@ -41,7 +41,6 @@
   display: flex;
   flex-wrap: wrap;
   padding: 10px;
-  margin-top: 330px;
   justify-content: space-around;
   gap: 1rem;
 }
@@ -83,4 +82,3 @@
     flex: 1 1 100%; 
   }
 }
-

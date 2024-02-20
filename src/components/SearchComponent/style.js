@@ -1,24 +1,35 @@
 import styled from 'styled-components';
 
+const headerHeight = '300px';
+
 export const FixedHeader = styled.div`
   position: fixed;
   top: 0;
   width: 100%;
   background-color: white;
   z-index: 100;
-  height: 250px;
+  height: ${headerHeight};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 `;
 
 export const MainContent = styled.div`
-  margin-top: [Height of your FixedHeader]; 
+  margin-top: ${headerHeight}; 
   padding-top: 1rem;
 `;
 
-export const FlexColmn = styled.div`
+export const Card = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  height: fit-content;
+  width: 100%;
+  padding: 20px;
+  border-radius: 15px;
 `; 
 
 export const Flex = styled.div`
@@ -29,19 +40,20 @@ export const Flex = styled.div`
   align-items: center;
   gap: 8px;
 
-`
+`;
+
 
 export const Container = styled.div`
-  display: inline-flex;
+  display: flex;
+  background-color: white;
   overflow: scroll;
-  width: 80%;
+  width: 300px;
   height: 50px;
   margin: 5px;
   padding-left: 14px;  
   border: 0.5px grey solid;
   border-radius: 5px;
   color: black
-  flex: 1 0 300px;
 
 `;
 
@@ -107,15 +119,6 @@ export const Button = styled.button`
   }
 `;
 
-export const FixedBar = styled.div`
-  position: fixed;
-  margin-top: 330px;
-  left: 0;
-  width: 100%;
-  background: white; 
-  z-index: 100; 
-  padding: 10px 0; 
-`;
 export const SearchTermsContainer = styled.div`
   margin-top: 20px;
   margin-bottom: 20px;
@@ -123,6 +126,7 @@ export const SearchTermsContainer = styled.div`
 
 export const Title = styled.h3`
   margin: 0 0 10px 0;
+  color: white;
 `;
 export const TermsContainer = styled.div`
   display: flex;
@@ -131,9 +135,8 @@ export const TermsContainer = styled.div`
 `;
 
 export const Term = styled.div`
-  background: radial-gradient(circle at left top, rgba(255, 50, 80, 0.8) 0%, rgba(255, 50, 80, 0) 100%),
-              linear-gradient(to left, rgb(255, 50, 80), rgb(255, 120, 0), rgb(255, 150, 100));
-  color: white;
+  background-color: #E9E9E9;
+  color: black;
   min-width: 70px;
   border-radius: 8px;
   display: flex;
@@ -141,8 +144,16 @@ export const Term = styled.div`
   align-items: center;
   padding: 5px 15px;
   margin-right: 10px;
-  font-size: 0.9rem;
+  font-size: 16px;
   white-space: nowrap;
 `;
 
 
+
+export const Row = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+`;
