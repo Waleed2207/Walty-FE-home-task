@@ -11,30 +11,33 @@ const SearchComponent = () => {
   const dispatch = useDispatch();
   const searchTerms = useSelector((state) => state.search.searchTerms);
 
-  const handleSearch = () => {
-    if (tags.length === 0) {
-      inputRef.current.setCustomValidity('Please enter at least one tag.');
-      inputRef.current.reportValidity();
-    } else {
-      inputRef.current.setCustomValidity('');
-      console.log(tags.join(' '));
-      dispatch(searchPhotos(tags.join(' '))); 
-    }
-  };
-  useEffect(() => {
-    if (input.endsWith(' ') && input.trim() !== '') {
-      const newTag = input.trim();
-      if (!tags.includes(newTag)) {
-        setTags([...tags, newTag]);
-        setInput('');
-      } else {
+  const handleSearch = (event) => {
+    event.preventDefault(); 
+  
+    const trimmedInput = input.trim();
+  
+    if (trimmedInput) {
+      if (!tags.includes(trimmedInput)) {
+        const updatedTags = [...tags, trimmedInput];
+        setTags(updatedTags);
+        dispatch(searchPhotos(updatedTags.join(' ')));
+        dispatch(searchPhotos(trimmedInput));
         setInput('');
       }
+    } else {
+      if (tags.length > 0) {
+        inputRef.current.setCustomValidity('Please enter another tag.');
+        // dispatch(searchPhotos(tags.join(' ')));
+      } else {
+        inputRef.current.setCustomValidity('Please enter at least one tag.');
+      }
+      inputRef.current.reportValidity();
+
     }
-  }, [input, tags]);
-  
+  };
+
   const onKeyDown = (e) => {
-    if (e.key === "Backspace" && !input && tags.length) {
+    if (e.key === "Backspace" && !input ) {
       e.preventDefault(); 
       const tagsCopy = [...tags];
       const poppedTag = tagsCopy.pop();
