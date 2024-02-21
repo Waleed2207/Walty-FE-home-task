@@ -42,7 +42,7 @@
   flex-wrap: wrap;
   padding: 10px;
   justify-content: space-around;
-  gap: 1rem;
+  /* gap: 1rem; */
 }
 
 .photo-item {

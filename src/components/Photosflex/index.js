@@ -20,7 +20,7 @@ const PhotosFlex = () => {
       setLoading(true);
       console.log('Fetching photos');
       try {
-        const response = await axios.get(`${API_BASE_URL}?key=${PIXABAY_API_KEY}&q=${encodeURIComponent(searchTag)}&image_type=photo&page=${page}`);
+        const response = await axios.get(`${API_BASE_URL}?key=${PIXABAY_API_KEY}&q=${encodeURIComponent(searchTag)}&image_type=photo&page=${page}&per_page=14`);
         console.log(response);
         dispatch(addMorePhotos(response.data.hits)); 
       } catch (error) {
@@ -48,7 +48,7 @@ const PhotosFlex = () => {
 
   return (
     <div className="photos-flex">
-      {photos.slice(0, 15 + (page - 1) * 15).map((photo, index) => (
+      {photos.slice(0, 14 + (page - 1) * 14).map((photo, index) => (
         <PhotoItem key={index}>
           <StyledImage src={photo.webformatURL} alt={photo.tags} />
         </PhotoItem>

@@ -1,8 +1,10 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import HeaderTitle from '../HeaderTitle';
 import { searchPhotos } from '../../actions';
 import PhotosFlex from '../PhotosFlex'; 
 import { Container, Input,FixedHeader,MainContent, Card, Row, Tag, ButtonTag, Button, SearchTermsContainer, Title, TermsContainer, Term } from './style.js'; 
+
 
 const SearchComponent = () => {
   const [input, setInput] = useState('');
@@ -58,7 +60,7 @@ const SearchComponent = () => {
     <>
       <FixedHeader>
         <Card>
-          <h1>Walty Photos Engine</h1>
+          <HeaderTitle/>
           <Row>
             <Container>
               {tags.map((tag, index) => (

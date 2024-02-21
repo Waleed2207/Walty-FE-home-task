@@ -20,8 +20,9 @@ export const PhotoItem = styled.div`
   }
 
   @media (max-width: 480px) {
-    width: 130px; 
-    height: 130px; 
+    width: 100px; 
+    height: 100px; 
+    flex: 1 2 100px auto;
   }
   @media (max-width: 280px) {
     width: 80px; 

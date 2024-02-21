@@ -73,6 +73,7 @@ export const Input = styled.input`
 export const Tag = styled.span`
   display: flex;
   align-items: center;
+  font-family: monospace;
   margin: 7px 0;
   margin-right: 10px;
   padding: 0 10px;
@@ -86,6 +87,7 @@ export const Tag = styled.span`
 export const ButtonTag = styled.button`
   display: flex;
   padding: 6px;
+  font-family: monospace;
   border: none;
   background-color: unset;
   cursor: pointer;
@@ -98,6 +100,7 @@ export const Button = styled.button`
   width: 120px;
   height: 50px;
   font-size: 16px;
+  font-family: monospace;
   color: white;
   border: none;
   border-radius: 10px;
@@ -127,6 +130,12 @@ export const SearchTermsContainer = styled.div`
 export const Title = styled.h3`
   margin: 0 0 10px 0;
   color: white;
+  font-family: monospace;
+
+`;
+export const Headertitle = styled.h1`
+  color: #431010;
+  font-family: monospace;
 `;
 export const TermsContainer = styled.div`
   display: flex;
@@ -135,8 +144,9 @@ export const TermsContainer = styled.div`
 `;
 
 export const Term = styled.div`
-  background-color: #E9E9E9;
-  color: black;
+  background-color: #f89797;
+  color: white;
+  font-family: monospace;
   min-width: 70px;
   border-radius: 8px;
   display: flex;
